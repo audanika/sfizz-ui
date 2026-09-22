@@ -27,11 +27,12 @@ SColorRGB::SColorRGB(const SColorHCY &hcy)
 
 CColor SColorRGB::toColor() const
 {
+    auto clamp01 = [](float v) { return v < 0.0f ? 0.0f : (v > 1.0f ? 1.0f : v); };
     CColor cc;
-    cc.setNormRed(r);
-    cc.setNormGreen(g);
-    cc.setNormBlue(b);
-    cc.setNormAlpha(a);
+    cc.setNormRed(clamp01(r));
+    cc.setNormGreen(clamp01(g));
+    cc.setNormBlue(clamp01(b));
+    cc.setNormAlpha(clamp01(a));
     return cc;
 }
 
